@@ -1,0 +1,73 @@
+#This YAML file contains the datamodel of the Aviatrix environment to be created. Indentation matters!
+
+###########################
+###  TRANSIT (FIRENET)  ###
+###########################
+transits:
+  transit1:
+    transit_cloud: aws
+    transit_cidr: 10.1.0.0/23
+    transit_region_name: eu-central-1
+    transit_asn: 65101
+  transit2:
+    transit_cloud: aws
+    transit_cidr: 10.1.2.0/23
+    transit_region_name: eu-west-1
+    transit_asn: 65102
+
+###########################
+###       SPOKES        ###
+###########################
+spokes:
+  spoke1:
+    cloud: aws
+    cidr: 10.99.1.0/24
+    region: eu-central-1
+    transit_gw: transit1
+  spoke2:
+    cloud: aws
+    cidr: 10.99.2.0/24
+    region: eu-west-1
+    transit_gw: transit2
+
+###########################
+###         DCF         ###
+###########################
+dcf_policies:
+  policy1:
+    x: y
+
+###########################
+### NETWORK SEGMENTATION ##
+###########################
+network_segmentation:
+  connection_policies:
+    - [blue, red]
+    - [green, blue]
+
+  #If the network domain is already defined in a connection policy, you can omit it here.
+  network_domains:
+    - yellow
+
+###########################
+##### GLOBAL SETTINGS #####
+###########################
+#This block defines the default values on the top level. They can be overridden on an individual resource level.
+global_settings:
+  #Default firenet images (Only used if firenet is enabled on a transit)
+  firenet_firewall_image:
+    aws: Palo Alto Networks VM-Series Next-Generation Firewall (BYOL)
+    azure: Palo Alto Networks VM-Series Next-Generation Firewall (BYOL)
+    gcp: Palo Alto Networks VM-Series Next-Generation Firewall BYOL
+    oci: Palo Alto Networks VM-Series Next Generation Firewall
+
+  #Default account names on the controller
+  transit_accounts:
+    aws: AWS
+    azure: Azure
+    gcp: GCP
+    oci: OCI
+    ali: ALI
+
+  #By default everything is deployed in HA. Disabling this deploys single transit/spoke gateways and firenet instances.
+  transit_ha_gw: true
