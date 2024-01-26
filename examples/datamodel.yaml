@@ -33,9 +33,15 @@ spokes:
 ###########################
 ###         DCF         ###
 ###########################
-dcf_policies:
-  policy1:
-    x: y
+dcf:
+  #Enable/disable DCF
+  dcf_enable: true
+
+  #Create DCF policies
+  dcf_policies:
+
+  #Create smart groups
+  smart_groups:
 
 ###########################
 ### NETWORK SEGMENTATION ##
