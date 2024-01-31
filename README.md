@@ -14,6 +14,7 @@
 
 - You already have an Aviatrix controller up and running or are deploying it outside of this module.
 - The access accounts are already onboarded or you are provisioning them outside of this module.
+- Your Terraform workspace is configured with the correct parameters to connect to the controller (Username/password/host).
 
 ### Limitations
 
@@ -29,7 +30,7 @@ If you need other capabilities, like TGW-O, NAT or S2C, you need to add them in 
 
 ### How to use this
 
-1. Create a new Terraform workspace and call this module
+1. Add this module to your Terraform workspace.
    ```hcl
    module "poc" {
      source  = "terraform-aviatrix-modules/poc/aviatrix"
@@ -38,11 +39,5 @@ If you need other capabilities, like TGW-O, NAT or S2C, you need to add them in 
      datamodel = yamldecode(file("datamodel.yaml"))
    }
    ```
-2. Copy the datamodel.xml file from the module examples to your Terraform workspace and define your environment per the example.
-3. Set up your controller credentials using environmental variables by running this in your bash shell.
-
-```bash
-export AVIATRIX_CONTROLLER_IP="controller_fqdn_or_ip"
-export AVIATRIX_USERNAME="admin"
-export AVIATRIX_PASSWORD='mysecretpassword'
-```
+2. Copy the datamodel.yaml file from the module examples to your Terraform workspace and define your environment per the example.
+3. Execute `terraform plan` and `terraform apply` to execute the changes.
