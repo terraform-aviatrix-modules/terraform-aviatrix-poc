@@ -12,8 +12,8 @@ locals {
   smart_groups = try(var.datamodel.dcf.smart_groups, {})
 
   default_smart_groups = {
-    Anywhere       = { uuid = "def000ad-0000-0000-0000-000000000000" },
-    PublicInternet = { uuid = "def000ad-0000-0000-0000-000000000001" }
+    any      = { uuid = "def000ad-0000-0000-0000-000000000000" },
+    internet = { uuid = "def000ad-0000-0000-0000-000000000001" }
   }
   enriched_smart_groups = merge(aviatrix_smart_group.smartgroups, local.default_smart_groups)
 
