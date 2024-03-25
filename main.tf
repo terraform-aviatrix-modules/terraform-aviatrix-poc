@@ -19,7 +19,7 @@ module "spokes" {
   cidr                     = try(each.value.cidr, null)
   region                   = each.value.region
   account                  = try(each.value.account, local.global_settings.transit_accounts[each.value.cloud], null)
-  transit_gw               = try(each.value.attached, true) ? module.backbone.transit[each.value.transit_gw].transit_gateway.gw_name : null
+  transit_gw               = try(each.value.attached, true) ? try(module.backbone.transit[each.value.transit_gw].transit_gateway.gw_name, null) : null
   network_domain           = try(each.value.network_domain, null)
   ha_gw                    = try(each.value.ha_gw, local.global_settings.transit_ha_gw, null)
   attached                 = try(each.value.attached, null)
@@ -67,6 +67,8 @@ resource "aviatrix_smart_group" "smartgroups" {
       }
     }
   }
+
+  depends_on = [aviatrix_distributed_firewalling_config.default]
 }
 
 resource "aviatrix_web_group" "webgroups" {
@@ -82,6 +84,8 @@ resource "aviatrix_web_group" "webgroups" {
       }
     }
   }
+
+  depends_on = [aviatrix_distributed_firewalling_config.default]
 }
 
 #DCF Policies
@@ -95,8 +99,8 @@ resource "aviatrix_distributed_firewalling_policy_list" "dcf_policies" {
       action   = upper(policies.value.action)
       protocol = policies.value.protocol
 
-      src_smart_groups         = [for i in policies.value.src_smart_groups : aviatrix_smart_group.smartgroups[i].uuid]
-      dst_smart_groups         = [for i in policies.value.dst_smart_groups : aviatrix_smart_group.smartgroups[i].uuid]
+      src_smart_groups         = [for i in policies.value.src_smart_groups : local.enriched_smart_groups[i].uuid]
+      dst_smart_groups         = [for i in policies.value.dst_smart_groups : local.enriched_smart_groups[i].uuid]
       exclude_sg_orchestration = try(policies.value.exclude_sg_orchestration, null)
       decrypt_policy           = try(policies.value.decrypt_policy, null)
       flow_app_requirement     = try(policies.value.flow_app_requirement, null)
@@ -114,6 +118,10 @@ resource "aviatrix_distributed_firewalling_policy_list" "dcf_policies" {
       }
     }
   }
-  depends_on = [aviatrix_smart_group.smartgroups]
+
+  depends_on = [
+    aviatrix_smart_group.smartgroups,
+    aviatrix_distributed_firewalling_config.default
+  ]
 }
 
