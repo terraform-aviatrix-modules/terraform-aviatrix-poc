@@ -1,6 +1,6 @@
 # Terraform Aviatrix PoC
 
-[!Caution]
+[!CAUTION]
  Do not use this module in production environments.
 
 ### Description
