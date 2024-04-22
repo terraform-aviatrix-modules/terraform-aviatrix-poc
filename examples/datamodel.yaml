@@ -9,11 +9,17 @@ transits:
     transit_cidr: 10.1.0.0/23
     transit_region_name: eu-central-1
     transit_asn: 65101
+    firenet: true
   transit2:
     transit_cloud: aws
     transit_cidr: 10.1.2.0/23
     transit_region_name: eu-west-1
     transit_asn: 65102
+  transit3:
+    transit_cloud: azure
+    transit_cidr: 10.1.4.0/23
+    transit_region_name: West Europe
+    transit_asn: 65103
 
 ###########################
 ###       SPOKES        ###
@@ -24,11 +30,17 @@ spokes:
     cidr: 10.99.1.0/24
     region: eu-central-1
     transit_gw: transit1
+    account: MyAWSAccount
   spoke2:
     cloud: aws
     cidr: 10.99.2.0/24
     region: eu-west-1
     transit_gw: transit2
+  spoke3:
+    cloud: azure
+    cidr: 10.99.3.0/24
+    region: West Europe
+    transit_gw: transit3
 
 ###########################
 ###         DCF         ###
@@ -39,9 +51,49 @@ dcf:
 
   #Create DCF policies
   dcf_policies:
+    policy1:
+      name: MyPolicy1
+      action: permit
+      protocol: tcp
+      src_smart_groups:
+        - production-servers
+      dst_smart_groups:
+        - dns
+    policy2:
+      name: MyPolicy2
+      action: permit
+      protocol: tcp
+      src_smart_groups:
+        - development-servers
+      dst_smart_groups:
+        - dns
 
   #Create smart groups
   smart_groups:
+    production-servers:
+      match_expressions:
+        expression1:
+          type: vm
+          account_name: devops
+          region: us-west-2
+          tags:
+            env: prod
+            class: server
+    development-servers:
+      match_expressions:
+        expression1:
+          type: vm
+          account_name: devops
+          region: us-west-2
+          tags:
+            env: dev
+            class: server
+    internet:
+      match_expressions:
+        expression1:
+          fqdn: www.cnn.com
+        expression2:
+          fqdn: www.nbc.com
 
 ###########################
 ### NETWORK SEGMENTATION ##
