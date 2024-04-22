@@ -1,8 +1,11 @@
 # Terraform Aviatrix PoC
 
+[!Caution]
+ Do not use this module in production environments.
+
 ### Description
 
-\This module provides a simplified way to deploy a PoC environment, by taking a YAML datamodel and deploying all resources, without the need to write actual Terraform code.
+This module provides a simplified way to deploy a PoC environment, by taking a YAML datamodel and deploying all resources, without the need to write actual Terraform code.
 
 ### Compatibility
 
