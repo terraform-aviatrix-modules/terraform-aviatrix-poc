@@ -1,5 +1,3 @@
-#This YAML file contains the datamodel of the Aviatrix environment to be created. Indentation matters!
-
 ###########################
 ###  TRANSIT (FIRENET)  ###
 ###########################
@@ -79,6 +77,8 @@ dcf:
           tags:
             env: prod
             class: server
+            type: web
+
     development-servers:
       match_expressions:
         expression1:
@@ -88,12 +88,24 @@ dcf:
           tags:
             env: dev
             class: server
+            type: web
+
     news:
       match_expressions:
         expression1:
           fqdn: www.cnn.com
         expression2:
           fqdn: www.nbc.com
+
+    dns:
+      match_expressions:
+        expression1:
+          type: vm
+          account_name: devops
+          tags:
+            env: prod
+            class: server
+            type: dns
 
 ###########################
 ### NETWORK SEGMENTATION ##
