@@ -88,7 +88,7 @@ dcf:
           tags:
             env: dev
             class: server
-    internet:
+    news:
       match_expressions:
         expression1:
           fqdn: www.cnn.com
