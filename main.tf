@@ -121,7 +121,7 @@ resource "aviatrix_distributed_firewalling_policy_list" "dcf_policies" {
 
   depends_on = [
     aviatrix_smart_group.smartgroups,
-    aviatrix_distributed_firewalling_config.default
+    aviatrix_distributed_firewalling_config.default,
+    terraform_data.input_validation
   ]
 }
-

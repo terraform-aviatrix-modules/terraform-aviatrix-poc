@@ -8,6 +8,14 @@ locals {
 
   #DCF Config
   dcf_policies = try(var.datamodel.dcf.dcf_policies, {}) #If dcf_policies is not found in var.datamodel or is empty, return an empty map
+
+  dcf_policies_smartgroups = distinct( #List of all smartgroups used in policies
+    flatten(
+      concat(
+        [for i in local.dcf_policies : i.src_smart_groups],
+        [for i in local.dcf_policies : i.dst_smart_groups]
+  )))
+
   dcf_enable   = try(var.datamodel.dcf.dcf_enable, false)
   smart_groups = try(var.datamodel.dcf.smart_groups, {})
 
