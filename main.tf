@@ -42,6 +42,7 @@ module "network_domains" {
 }
 
 resource "aviatrix_distributed_firewalling_config" "default" {
+  count                          = local.dcf_enable != null ? 1 : 0
   enable_distributed_firewalling = local.dcf_enable
 }
 

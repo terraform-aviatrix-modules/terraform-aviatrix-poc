@@ -3,8 +3,8 @@ locals {
   global_settings = try(var.datamodel.global_settings, {}) #If global_settings is not found in var.datamodel, return an empty map
 
   #Spokes, transits and firenet config
-  transits = coalesce(var.datamodel.transits, {}) #If transits is not found in var.datamodel or is empty, return an empty map
-  spokes   = coalesce(var.datamodel.spokes, {})   #If spokes is not found in var.datamodel or is empty, return an empty map
+  transits = try(var.datamodel.transits, {}) #If transits is not found in var.datamodel or is empty, return an empty map
+  spokes   = try(var.datamodel.spokes, {})   #If spokes is not found in var.datamodel or is empty, return an empty map
 
   #DCF Config
   dcf_policies = try(var.datamodel.dcf.dcf_policies, {}) #If dcf_policies is not found in var.datamodel or is empty, return an empty map
@@ -16,7 +16,7 @@ locals {
         [for i in local.dcf_policies : i.dst_smart_groups]
   )))
 
-  dcf_enable   = try(var.datamodel.dcf.dcf_enable, false)
+  dcf_enable   = try(var.datamodel.dcf.dcf_enable, null)
   smart_groups = try(var.datamodel.dcf.smart_groups, {})
 
   default_smart_groups = {
@@ -30,8 +30,4 @@ locals {
   #Network segmentation
   network_domains     = try(var.datamodel.network_segmentation.network_domains, [])     #If network_domains is not found in var.datamodel or is empty, return an empty list
   connection_policies = try(var.datamodel.network_segmentation.connection_policies, []) #If connection_policies is not found in var.datamodel or is empty, return an empty list
-}
-
-output "enriched" {
-  value = local.enriched_smart_groups
 }
