@@ -21,6 +21,7 @@ module "spokes" {
   account                  = try(each.value.account, local.global_settings.transit_accounts[each.value.cloud], null)
   transit_gw               = try(each.value.attached, true) ? try(module.backbone.transit[each.value.transit_gw].transit_gateway.gw_name, null) : null
   network_domain           = try(each.value.network_domain, null)
+  insane_mode              = try(each.value.insane_mode, null)
   ha_gw                    = try(each.value.ha_gw, local.global_settings.transit_ha_gw, null)
   attached                 = try(each.value.attached, null)
   bgp_lan_interfaces_count = try(each.value.bgp_lan_interfaces_count, null)
