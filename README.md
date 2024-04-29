@@ -11,7 +11,7 @@ This module provides a simplified way to deploy a PoC environment, by taking a Y
 
 | Module version | Terraform version | Controller version | Terraform provider version |
 | :------------- | :---------------- | :----------------- | :------------------------- |
-| v1.0.1         | >= 1.4.0          | 7.1                | ~> 3.1.0                   |
+| v1.0.2         | >= 1.4.0          | 7.1                | ~> 3.1.0                   |
 
 ### Assumptions
 
@@ -37,7 +37,7 @@ If you need other capabilities, like TGW-O, NAT or S2C, you need to add them in 
    ```hcl
    module "poc" {
      source  = "terraform-aviatrix-modules/poc/aviatrix"
-     version = "v1.0.0"
+     version = "v1.0.2"
 
      datamodel = yamldecode(file("datamodel.yaml"))
    }
