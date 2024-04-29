@@ -15,7 +15,7 @@ resource "terraform_data" "input_validation" {
     #Check that only defined smartgroups are used in the policies.
     precondition {
       condition = alltrue([
-        for i in local.dcf_policies_smartgroups : contains(keys(local.smart_groups), i)
+        for i in local.dcf_policies_smartgroups : contains(keys(local.enriched_smart_groups), i)
       ])
 
       error_message = "Make sure all smartgroups referenced in your policies are defined under smartgroups."
