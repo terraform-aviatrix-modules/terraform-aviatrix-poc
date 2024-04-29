@@ -1,5 +1,7 @@
 This document shows how to define the transits section and all of its configuration options. Firenet is also configured here. These arguments are fed into the mc-backbone module. All supported settings can be found on this [documentation page](https://github.com/terraform-aviatrix-modules/terraform-aviatrix-backbone).
 
+By default transits are peered full mesh, in what is described as "optimized" mode in the mc-backbone module. Find more information on peering in this [document](https://github.com/terraform-aviatrix-modules/terraform-aviatrix-backbone/blob/main/docs/PEERING.md).
+
 The transits YAML structure
 ```yaml
 transits: #Defines the section where transit firenet is defined
