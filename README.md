@@ -49,7 +49,7 @@ If you need other capabilities, like TGW-O, NAT or S2C, you need to add them in 
 
 The data model containing all your configuration is written in YAML and needs to be stored in a file called datamodel.yaml. You can configure 5 sections in this file. Click on the links to find out more details.
 
-- [transit](https://github.com/terraform-aviatrix-modules/terraform-aviatrix-poc/blob/main/docs/TRANSITS.md)
+- [transits](https://github.com/terraform-aviatrix-modules/terraform-aviatrix-poc/blob/main/docs/TRANSITS.md)
 - [spokes](https://github.com/terraform-aviatrix-modules/terraform-aviatrix-poc/blob/main/docs/SPOKES.md)
 - [dcf](https://github.com/terraform-aviatrix-modules/terraform-aviatrix-poc/blob/main/docs/DCF.md)
 - [network_domains](https://github.com/terraform-aviatrix-modules/terraform-aviatrix-poc/blob/main/docs/NETWORK_DOMAINS.md)
