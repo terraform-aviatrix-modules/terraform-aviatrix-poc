@@ -1,11 +1,6 @@
-Please update this file with information about changes between version and upgrade information.
-
 # Terraform Aviatrix PoC - release notes
 
-## Release Version
+## v1.1.0
 
-Describe release
-
-### Feature
-
-Describe new featue
+### Add compatibility with 7.2/3.2.0
+The module (Version 1.1.x) is now compatible for usage with controller version 7.2 and provider version 3.2.x.

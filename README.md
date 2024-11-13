@@ -11,7 +11,7 @@ This module provides a simplified way to deploy a PoC environment, by taking a Y
 
 | Module version | Terraform version | Controller version | Terraform provider version |
 | :------------- | :---------------- | :----------------- | :------------------------- |
-| v1.0.2         | >= 1.4.0          | 7.1                | ~> 3.1.0                   |
+| v1.1.0         | => 1.4.0          | 7.2                | ~> 3.2.0                   |
 
 ### Assumptions
 

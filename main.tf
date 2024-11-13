@@ -1,6 +1,6 @@
 module "backbone" {
   source  = "terraform-aviatrix-modules/backbone/aviatrix"
-  version = "v1.2.2"
+  version = "v1.3.0"
 
   global_settings = local.global_settings
   transit_firenet = local.transits
@@ -10,7 +10,7 @@ module "backbone" {
 
 module "spokes" {
   source  = "terraform-aviatrix-modules/mc-spoke/aviatrix"
-  version = "v1.6.9"
+  version = "v1.7.0"
 
   for_each = local.spokes
 
