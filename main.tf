@@ -2,8 +2,12 @@ module "backbone" {
   source  = "terraform-aviatrix-modules/backbone/aviatrix"
   version = "v1.3.0"
 
-  global_settings = local.global_settings
-  transit_firenet = local.transits
+  global_settings    = local.global_settings
+  transit_firenet    = local.transits
+  excluded_cidrs     = local.excluded_cidrs
+  peering_mode       = local.peering_mode
+  peering_map        = local.peering_map
+  peering_prune_list = local.peering_prune_list
 
   depends_on = [terraform_data.input_validation]
 }

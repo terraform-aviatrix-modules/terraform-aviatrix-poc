@@ -6,6 +6,12 @@ locals {
   transits = try(var.datamodel.transits, {}) #If transits is not found in var.datamodel or is empty, return an empty map
   spokes   = try(var.datamodel.spokes, {})   #If spokes is not found in var.datamodel or is empty, return an empty map
 
+  #Peering settings
+  excluded_cidrs     = try(var.datamodel.peering_settings.excluded_cidrs, null)
+  peering_mode       = try(var.datamodel.peering_settings.peering_mode, null)
+  peering_map        = try(var.datamodel.peering_settings.peering_map, null)
+  peering_prune_list = try(var.datamodel.peering_settings.excluded_peering_prune_list, null)
+
   #DCF Config
   dcf_policies = try(var.datamodel.dcf.dcf_policies, {}) #If dcf_policies is not found in var.datamodel or is empty, return an empty map
 
@@ -31,3 +37,5 @@ locals {
   network_domains     = try(var.datamodel.network_segmentation.network_domains, [])     #If network_domains is not found in var.datamodel or is empty, return an empty list
   connection_policies = try(var.datamodel.network_segmentation.connection_policies, []) #If connection_policies is not found in var.datamodel or is empty, return an empty list
 }
+
+
